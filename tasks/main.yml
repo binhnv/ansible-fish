@@ -1,0 +1,17 @@
+---
+- name: Install fish via Homebrew
+  package:
+    name: fish
+    state: latest
+  when: ansible_os_family == "Darwin"
+
+- name: Add fish to available shells
+  become: yes
+  become_method: sudo
+  lineinfile:
+    dest: /etc/shells
+    line: /usr/local/bin/fish
+
+- name: Set fish as default shell
+  command: chsh -s /usr/local/bin/fish
+  when: set_fish_as_default_shell == true
