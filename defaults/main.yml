@@ -1,2 +1,7 @@
 ---
-set_fish_as_default_shell: false
+fish_default_shell: true
+fish_install_omf: true
+fish_users:
+  -
+    name: "{{ ansible_user_id }}"
+    omf_location: "{{ ansible_user_dir }}/.local/share/omf"

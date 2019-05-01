@@ -1,0 +1,18 @@
+---
+- name: Check if omf is installed
+  stat:
+    path: "{{ item.omf_location }}"
+  register: fish_omf
+
+- name: Clone omf repo
+  git:
+    repo: 'https://github.com/oh-my-fish/oh-my-fish'
+    dest: '/tmp/omf'
+    clone: yes
+  when: not fish_omf.stat.exists
+
+- name: Install omf
+  become: true
+  become_user: '{{ item.name }}'
+  command: /tmp/omf/bin/install -y --offline --noninteractive
+  when: not fish_omf.stat.exists

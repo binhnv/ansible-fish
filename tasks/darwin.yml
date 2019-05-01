@@ -1,0 +1,21 @@
+---
+- name: Install fish via Homebrew
+  package:
+    name: fish
+    state: latest
+
+- name: Find fish location
+  command: which fish
+  register: fish_location
+
+- name: Add fish to available shells
+  become: yes
+  become_method: sudo
+  lineinfile:
+    dest: /etc/shells
+    line: "{{ fish_location.stdout }}"
+
+- name: Set fish as default shell
+  user: name="{{ item.name }}", shell="{{ fish_location.stdout }}"
+  loop: "{{ fish_users }}"
+  when: fish_default_shell == true

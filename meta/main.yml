@@ -1,16 +1,22 @@
 ---
 galaxy_info:
-  author: Ian Copp
-  description: Install fish via Homebrew.
+  author: Binh Van Nguyen
+  description: Install fish shell
   license: MIT
   min_ansible_version: 1.2
   platforms:
     - name: MacOSX
       versions:
         - all
+    - name: macOS
+      versions:
+        - all
   galaxy_tags:
     - system
+    - fish
+    - shell
+    - oh-my-fish
 
 dependencies:
-  - role: icopp.homebrew
+  - role: geerlingguy.homebrew
     when: ansible_os_family == "Darwin"
