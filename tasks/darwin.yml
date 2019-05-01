@@ -16,6 +16,8 @@
     line: "{{ fish_location.stdout }}"
 
 - name: Set fish as default shell
-  user: name="{{ item.name }}", shell="{{ fish_location.stdout }}"
+  become: yes
+  become_user: "{{ item.name }}"
+  command: chsh -s "{{ fish_location.stdout }}"
   loop: "{{ fish_users }}"
   when: fish_default_shell == true
