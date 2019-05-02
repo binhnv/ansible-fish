@@ -1,22 +1,16 @@
 ---
 galaxy_info:
   author: Binh Van Nguyen
-  description: Install fish shell
+  description: Install fish shell and Oh-My-Fish
   license: MIT
   min_ansible_version: 1.2
   platforms:
     - name: MacOSX
-      versions:
-        - all
     - name: macOS
-      versions:
-        - all
   galaxy_tags:
     - system
     - fish
     - shell
     - oh-my-fish
 
-dependencies:
-  - role: geerlingguy.homebrew
-    when: ansible_os_family == "Darwin"
+dependencies: []
